@@ -1,0 +1,356 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Verifiable Global ID",
+    "description": "Schema of the Verifiable Global ID for a natural person",
+    "type": "object",
+    "allOf": [{
+            "$ref": "./verifiable-attestation-v1.json"
+        },
+        {
+            "properties": {
+                "credentialSubject": {
+                    "$ref": "#/definitions/credentialSubjectDef"
+                }
+            }
+        }
+    ],
+    "definitions": {
+        "addressDef": {
+            "description": "A spatial object that in a human-readable way identifies a fixed location. See: https://semiceu.github.io/Core-Location-Vocabulary/releases/2.00/#Address",
+            "type": "object",
+            "properties": {
+                "addressArea": {
+                    "description": "The name of a geographic area that groups Addresses. This would typically be part of a city, a neighbourhood or village, e.g. Montmartre. Address area is not an administrative unit.",
+                    "type": "string"
+                },
+                "addressID": {
+                    "description": "A globally unique identifier for each instance of an Address. The concept of adding a globally unique identifier for each instance of an address is a crucial part of the INSPIRE data spec. A number of EU countries have already implemented an ID (a UUID) in their Address Register/gazetteer, among them Denmark. OASIS xAL also includes an address identifier. It is the address Identifier that allows an address to be represented in a format other than INSPIRE whilst remaining conformant to the Core Vocabulary",
+                    "type": "string"
+                },
+                "administrativeUnit": {
+                    "description": "A detailed administrative unit organized in a hierarchy. This class should be used whenever a classification mechanism is in place, in alternative to the properties adminUnitL1 and adminUnitL2 of the Address class which allow free text.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "description": "The classification of the administrative unit.",
+                                "type": "string"
+                            },
+                            "level": {
+                                "description": "The level of the administrative unit in the hierarchy. Some recommended codelists from the EU Publications Office and Eurostat include: Administrative Territorial Units (ATU), NUTS and Local Administrative Units (LAU).",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "administrativeUnitLevel1": {
+                    "description": "The name of the uppermost level of the address, almost always a country.",
+                    "type": "string"
+                },
+                "administrativeUnitLevel2": {
+                    "description": "The name of a secondary level/region of the address, usually a county, state or other such area that typically encompasses several localities.",
+                    "type": "string"
+                },
+                "fullAddress": {
+                    "description": "The complete address written as a string. Use of this property is recommended as it will not suffer any misunderstandings that might arise through the breaking up of an address into its component parts. This property is analogous to vCard's label property but with two important differences: (1) formatting is not assumed so that, unlike vCard label, it may not be suitable to print this on an address label, (2) vCard's label property has a domain of vCard Address; the fullAddress property has no such restriction. An example of a full address is \"Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France\".",
+                    "type": "string"
+                },
+                "locatorDesignator": {
+                    "description": "A number or sequence of characters that uniquely identifies the locator within the relevant scope. In simpler terms, this is the building number, apartment number, etc. For an address such as \"Flat 3, 17 Bridge Street\", the locator is \"flat 3, 17\".",
+                    "type": "string"
+                },
+                "locatorName": {
+                    "description": "Proper noun(s) applied to the real world entity identified by the locator. The locator name could be the name of the property or complex, of the building or part of the building, or it could be the name of a room inside a building.  The key difference between a locator and a locator name is that the latter is a proper name and is unlikely to include digits.For example, \"Shumann, Berlaymont\" is a meeting room within the European Commission headquarters for which locator name is more appropriate than locator. ",
+                    "type": "string"
+                },
+                "postCode": {
+                    "description": "The code created and maintained for postal purposes to identify a subdivision of addresses and postal delivery points. Post codes are common elements in many countries' postal address systems. One of the many post codes of Paris is for example \"75000\".",
+                    "type": "string"
+                },
+                "postName": {
+                    "description": "A name created and maintained for postal purposes to identify a subdivision of addresses and postal delivery points. Usually a city, for example \"Paris\".",
+                    "type": "string"
+                },
+                "postOfficeBox": {
+                    "description": "A location designator for a postal delivery point at a post office, usually a number. INSPIRE's name for this is \"postalDeliveryIdentifier\" for which it uses the locator designator property with a type attribute of that name. This vocabulary separates out the Post Office Box for greater independence of technology. An example post office box number is \"9383\".",
+                    "type": "string"
+                },
+                "thoroughfare": {
+                    "description": "The name of a passage or way through from one location to another. A thoroughfare is usually a street, but it might be a waterway or some other feature. For example, \"Avenue des Champs-Élysées\".",
+                    "type": "string"
+                }
+            }
+        },
+        "geometryDef": {
+            "description": "A shape or form of a Location.",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "description": "A list of geographic coordinates that define the extent of the Geometry. Can be expressed as longitude, latitude, elevation.",
+                    "type": "string"
+                },
+                "crs": {
+                    "description": "An identifier for the coordinate reference system. Can be a coordinate-based local, regional or global system used to locate geographical entities.",
+                    "type": "string",
+                    "format": "uri"
+                },
+                "w3w": {
+                    "description": "A what3words three word string identifier that defines a location in a unique and immutable way. The identifier MUST begin with /// followed by three period-separated words. E.g., ///operated.dice.madness",
+                    "type": "string"
+                },
+                "latitude": {
+                    "description": "The geographic coordinate that specifies the north / south position of the Geometry on the Earth's surface.",
+                    "type": "string"
+                },
+                "longitude": {
+                    "description": "The geographic coordinate that specifies the east / west position of the Geometry on the Earth's surface.",
+                    "type": "string"
+                }
+            }
+        },
+        "locationDef": {
+            "description": "An identifiable geographic place or named place.",
+            "type": "object",
+            "properties": {
+                "geographicIdentifier": {
+                    "description": "A reference in the form of a Uniform Resource Identifier to the Location.",
+                    "type": "string",
+                    "format": "URI"
+                },
+                "geographicName": {
+                    "description": "A textual description for a Location.",
+                    "type": "string"
+                }
+            }
+        },
+        "jurisdictionDef": {
+            "description": "The limits or territory within which authority may be exercised.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "A reference in the form of a Uniform Resource Identifier to the Jurisdiction.",
+                    "type": "string",
+                    "format": "URI"
+                },
+                "name": {
+                    "description": "A string of characters that represents a Jurisdiction. The name is simply a string that identifies the Jurisdiction, typically a country, with or without a language tag.",
+                    "type": "string"
+                }
+
+            }
+        },
+        "credentialSubjectDef": {
+            "allOf": [{
+                    "properties": {
+                        "id": {
+                            "description": "Defines the DID of the subject that is described by the Verifiable Attestation. This identifier is usually used for cryptographic binding.",
+                            "type": "string",
+                            "format": "uri",
+                            "examples": ["did:ebsi:z...", "did:key:..."]
+                        },
+                        "claims": {
+                            "type": "object",
+                            "properties": {
+
+                                "personalIdentifier": {
+                                    "description": "Defines the unique national identifier of the credential subject constructed by the issuing authority or organisation for the purposes of cross-border identification and which is as persistent as possible in time.",
+                                    "anyOf": [{
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "type": {
+                                                        "description": "Defines the unique identifier type as defined by the issuing authority or organisation.",
+                                                        "type": "string"
+                                                    },
+                                                    "identifier": {
+                                                        "description": "Defines the unique identifier.",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "type": {
+                                                    "description": "Defines the unique identifier type as defined by the issuing authority or organisation.",
+                                                    "type": "string"
+                                                },
+                                                "identifier": {
+                                                    "description": "Defines the unique identifier.",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "example": {
+                                        "type": "taxid",
+                                        "value": "1234qwerty"
+                                    }
+                                },
+                                "fullName": {
+                                    "description": "Credential subject's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the credential subject's locale and preferences .In some cases, the entire name where the holder’s name cannot be divided into two parts.",
+                                    "$ref": "./definitions/language-tagged-string.json",
+                                    "examples": ["Alice Wonderland", {
+                                        "en": "Alice Wonderland",
+                                        "es": "Alicia Wonderland"
+                                    }]
+                                },
+                                "familyName": {
+                                    "description": "The issuing State or organisation shall establish which part of the name is the primary identifier. This may be the family name, the maiden name or the married name, the main name, the surname.",
+                                    "$ref": "./definitions/language-tagged-string.json",
+                                    "examples": ["Wonderland"]
+                                },
+                                "firstName": {
+                                    "description": "The remaining parts of the name (the ones that are not part of the familyName) are the secondary identifier. These may be the forenames, familiar names, given names, initials, or any other secondary names.",
+                                    "$ref": "./definitions/language-tagged-string.json",
+                                    "examples": ["Alice"]
+                                },
+                                "fullNameAtBirth": {
+                                    "description": "Credential subject's full name at birth in displayable form including all name parts, possibly including titles and suffixes, ordered according to the credential subject's locale and preferences.",
+                                    "$ref": "./definitions/language-tagged-string.json",
+                                    "examples": ["Alice Wonderland", {
+                                        "en": "Alice Wonderland",
+                                        "es": "Alicia Wonderland"
+                                    }]
+                                },
+                                "familyNameAtBirth": {
+                                    "description": "Defines the the family name(s) of the credential subject at the time of their birth",
+                                    "$ref": "./definitions/language-tagged-string.json"
+                                },
+                                "firstNameAtBirth": {
+                                    "description": "Defines the the first name(s) of the credential subject at the time of their birth",
+                                    "$ref": "./definitions/language-tagged-string.json"
+                                },
+                                "alsoKnownAs": {
+                                    "description": "Stage name, religious name or any other type of alias/pseudonym with which a person is known in a specific context besides its legal name. This must be part of the applicable legislation and thus the trust framework (e.g., be an attribute on the identity card). (reference to 'alternativeName')",
+                                    "$ref": "./definitions/language-tagged-string.json"
+                                },
+                                "citizenship": {
+                                    "description": "The Jurisdiction that has conferred citizenship rights on the Person such as the right to vote, to receive certain protection from the community or the issuance of a passport. Citizenship is information needed by many cross-border use cases and is a legal status as opposed to the more culturally-focussed and less well-defined term 'nationality'.",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/jurisdictionDef"
+                                    }
+                                },
+                                "nationalities": {
+                                    "description": "End-User's nationalities using ICAO 3-letter codes [ICAO-Doc9303], e.g., \"USA\" or \"JPN\". 2-letter ICAO codes MAY be used in some circumstances for compatibility reasons. (reference: eKYC) Nationality is more culturally-focused and less well-defined than citizenship. A person can have one or more nationalities.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "ICAO 3-letter code"
+                                    }
+                                },
+                                "dateOfBirth": {
+                                    "description": "Defines date of birth of the credential subject, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format. The year MAY be 0000, indicating that it is omitted. To represent only the year, YYYY format is allowed. Note that depending on the underlying platform's date related function, providing just year can result in varying month and day, so the implementers need to take this factor into account to correctly process the dates. Date SHOULD be entered in accordance with the Gregorian calendar.",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "placeOfBirth": {
+                                    "description": "Defines the place where the credential subject is born",
+                                    "anyOf": [{
+                                            "$ref": "#/definitions/geometryDef"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/locationDef"
+                                        }
+                                    ]
+                                },
+                                "dateOfDeath": {
+                                    "description": "Defines date of death of the credential subject, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format. The year MAY be 0000, indicating that it is omitted. To represent only the year, YYYY format is allowed. Note that depending on the underlying platform's date related function, providing just year can result in varying month and day, so the implementers need to take this factor into account to correctly process the dates. Date SHOULD be entered in accordance with the Gregorian calendar.",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "placeOfDeath": {
+                                    "description": "Defines the place where the credential subject died",
+                                    "anyOf": [{
+                                            "$ref": "#/definitions/geometryDef"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/locationDef"
+                                        }
+                                    ]
+                                },
+                                "domicile": {
+                                    "description": "The place (address) that the Person treats as permanent home. Place where subject actually lives.",
+                                    "anyOf": [{
+                                            "$ref": "#/definitions/geometryDef"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/addressDef"
+                                        }
+                                    ]
+                                },
+                                "residency": {
+                                    "description": "Jurisdiction where the Person has their dwelling. A Person's fixed, permanent, and principal home for legal purposes, the place (especially the house) in which a person officially lives or resides. A Person has one, multiple or even no residency status. Multiple residencies are recorded as multiple instances of the residency.",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/jurisdictionDef"
+                                    }
+                                },
+                                "gender": {
+                                    "description": "The identities, expressions and societal roles of the Person. The gender of an individual should be recorded using a controlled vocabulary that is appropriate for the specific context. In some cases, the chromosomal or physical state of an individual will be more important than the gender that they express, in others the reverse will be true. What is always important is that the controlled vocabulary used to describe an individual's gender is stated explicitly. Text or URI.",
+                                    "type": "string"
+                                },
+                                "phoneNumber": {
+                                    "description": "End-User's mobile phone number formatted according to ITU-T recommendation [E.164], e.g., \"+1999550123\" (eKYC)",
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "description": "End-User's preferred e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique. (OIDC core)",
+                                    "type": "string"
+                                },
+                                "pictureURI": {
+                                    "description": "URL of the End-User's profile picture. This URL MUST refer to an image file (for example, a PNG, JPEG, or GIF image file), rather than to a Web page containing an image. Note that this URL SHOULD specifically reference a profile photo of the End-User suitable for displaying when describing the End-User, rather than an arbitrary photo taken by the End-User. (OIDC core)",
+                                    "type": "string",
+                                    "format": "URI"
+                                },
+                                "picture": {
+                                    "description": "End-User's profile picture. This URL MUST refer to an image file (for example, a PNG, JPEG, or GIF image file), rather than to a Web page containing an image. Note that this URL SHOULD specifically reference a profile photo of the End-User suitable for displaying when describing the End-User, rather than an arbitrary photo taken by the End-User.",
+                                    "type": "object",
+                                    "properties": {
+                                        "format": {
+                                            "description": "Picture format. Should be PNG, JPEG, or GIF",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "description": "base64 encoded picture",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "biometrics": {
+                                    "description": "Biometrics data -- similar to picture",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
+                                                "description": "Name that determines the type of biometric info. E.g., fingerprint, ...",
+                                                "type": "string"
+                                            },
+                                            "format": {
+                                                "description": "Format of the biometric info.",
+                                                "type": "string"
+                                            },
+                                            "data": {
+                                                "description": "base64 encoded information",
+                                                "type": "string"
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "$ref": "./verified_claims-12.json#/definitions/verified_claims_def2"
+                }
+            ]
+        }
+    }
+}

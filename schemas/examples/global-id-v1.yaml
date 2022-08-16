@@ -1,0 +1,96 @@
+"@context":
+  - "https://www.w3.org/2018/credentials/v1"
+id: "uri:vc:id:ab33366e-83cb-4a8b-b601-23ce96fa24cc"
+type:
+  - VerifiableCredential
+  - VerifiableGlobalId
+
+issuer: "did:id:zyrMG8T9xYbNoSwyQa4SGMJ"
+
+issued: "2022-08-10T14:37:22"
+validFrom: "2022-09-10T14:37:22"
+validUntil: "2023-09-10T14:37:22"
+
+credentialSubject:
+    - id: "did:id:alice#personalInfo"
+      claims:
+        personalIdentifier: "288892998928505"
+        fullName: 
+          en: "Alice Doe, PhD"
+          es: "Alicia Doe, PhD"
+        familyName: "Doe"
+        firstName: 
+          en: "Alice"
+          es: "Alicia"
+        fullNameAtBirth: "Alice Kid"
+        familyNameAtBirth: "Kid"
+        firstNameAtBirth: "Alice"
+      verification: 
+        trustFramework: "eIDAS"
+        assuranceLevel: "high"
+        time: "2022-08-10T14:37:22"
+        verificationProcess: "Manual verification"
+        evidence: id_document
+
+    - id: "did:id:alice#personalInfoSelfDeclared"
+      claims:
+        alsoKnownAs: "Little Alice"
+      verification:
+        trustFramework: "eIDAS"
+        assuranceLevel: "low"
+        time: "2022-08-10T14:37:22"
+        verificationProcess: "Self-assertion"
+    
+    - id: "did:id:alice#otherPersonalInfo"
+      claims:
+        citizenship:
+          - id: "uri:jurisdiction:spain"
+            name: "Spain"
+          - id: "uri:jurisdiction:germany"
+            name: "Germany"
+        nationalities:
+          - DEU
+          - ESP
+        dateOfBirth: 1980-02-28
+        placeOfBirth: 
+          geographicIdentifier: https://www.geonames.org/3117735/madrid.html
+          geographicName: Madrid
+        dateOfDeath: 2022-02-28
+        placeOfDeath: 
+          geographicIdentifier: https://www.geonames.org/3117735/madrid.html
+          geographicName: Madrid
+        domicile:
+          fullAddress: "C. de Jorge Juan, 106, 28009 Madrid, Spain"
+        residency:
+          - id: "uri:jurisdiction:spain"
+            name: "Spain"
+          - id: "uri:jurisdiction:germany"
+            name: "Germany"
+        gender: F
+        phoneNumber: +123456789
+        email: alice@doe.wonderland
+        pictureURI: "https://alice.wonderland/profile-photo.jpg"
+        picture:
+          format: PNG
+          data: SGVsbG8gV29ybGQh
+        biometrics:
+          - name: fingerprint
+            format: "TBD"
+            data: SGVsbG8gV29ybGQh
+      verification:
+        trustFramework: "eIDAS"
+        assuranceLevel: "low"
+        time: "2022-08-10T14:37:22"
+        verificationProcess: "Manual verification"
+        evidence: id_document
+
+credentialStatus: 
+  - "id": "https://api.global.id/trusted-issuers-registry/v3/issuers/did:id:zyrMG8T9xYbNoSwyQa4SGMJ/proxy/6cc5fcc621d8098977d378ec7bf63f9ad0b204d56bb604f75bc9290e7033ac84/credentials/status/5#129430"
+    "type": "StatusList2021Entry"
+    "statusPurpose": "revocation"
+    "statusListIndex": "129430"
+    "statusListCredential": "https://api.global.id/trusted-issuers-registry/v3/issuers/did:id:zyrMG8T9xYbNoSwyQa4SGMJ/proxy/6cc5fcc621d8098977d378ec7bf63f9ad0b204d56bb604f75bc9290e7033ac84/credentials/status/5"
+  
+credentialSchema:
+  id: https://global.id/schemas/2022-08/global-id.json
+  type: FullJsonSchemaValidator2021

@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Verifiable Global ID",
+	"description": "Schema of the Verifiable Global ID for a natural person",
+	"type": "object",
+
+	"oneOf": [{
+		"type": "string"
+	}, {
+		"type": "object",
+		"properties": {
+			"<languageTag>": {
+				"description": "Language tag is the 2-character language tag as defined in TBD",
+				"type": "string"
+			}
+		}
+	}]
+}
