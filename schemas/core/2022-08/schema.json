@@ -4,7 +4,7 @@
     "description": "Schema of the Verifiable Global ID for a natural person",
     "type": "object",
     "allOf": [{
-            "$ref": "./verifiable-attestation-v1.json"
+            "$ref": "./definitions/verifiable-attestation.json"
         },
         {
             "properties": {
@@ -348,7 +348,7 @@
                     }
                 },
                 {
-                    "$ref": "./verified_claims-12.json#/definitions/verified_claims_def2"
+                    "$ref": "./definitions/verified-claims.json#/definitions/verified_claims_def2"
                 }
             ]
         }
