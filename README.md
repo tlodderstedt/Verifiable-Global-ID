@@ -1,7 +1,7 @@
-# Verifiable-Global-ID
+# Verifiable Global ID
 
 Table of contents
-- [Verifiable-Global-ID](#verifiable-global-id)
+- [Verifiable Global ID](#verifiable-global-id)
 	- [Introduction](#introduction)
 	- [Folder structure](#folder-structure)
 	- [Converting JSON Schema to human-readable format](#converting-json-schema-to-human-readable-format)
